@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-bottom: 50px;
+}
+
+.form-container {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#formulario {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    gap: 10px;
+}
+
+#formulario input {
+    height: 30px;
+}
+
+.message-container {
+    width: 40%;
+    height: 30px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+p {
+    width: 100%;
+    display: none;
+}
