@@ -1,5 +1,5 @@
 document.getElementById("formulario").addEventListener("submit", function (event) {
-    // Previne o comportamento padrão do formulário (evita que a página seja recarregada)
+    // Previne o comportamento padrão do formulário
     event.preventDefault();
 
     // Pega os valores dos campos
@@ -8,8 +8,7 @@ document.getElementById("formulario").addEventListener("submit", function (event
 
     let mensagem = document.getElementById("mensagem");
 
-
-    // Validação
+    // Validação dos valores
     if (valorB > valorA) {
         mensagem.textContent = "Formulário válido!";
         mensagem.style.background = "green";
@@ -18,6 +17,6 @@ document.getElementById("formulario").addEventListener("submit", function (event
         mensagem.style.background = "red";
     }
 
-    // Exibe a mensagem
+    // Exibe a mensagem 
     mensagem.style.display = "block";
 });
