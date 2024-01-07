@@ -1,56 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="pt-br">
+  <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-    <title>Bootstrap Form</title>
-</head>
+    <title>Meu Github</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <img
+          class="profile-avatar"
+          src="https://via.placeholder.com/180x180"
+          id="avatar"
+          alt="."
+        />
+        <h1 class="profile-name" id="name"></h1>
+        <h2 class="profile-username" id="username"></h2>
+        <ul class="numbers">
+          <li class="numbers-item">
+            <h4>Repositórios</h4>
+            <span id="repos"></span>
+          </li>
+          <li class="numbers-item">
+            <h4>Seguidores</h4>
+            <span id="followers"></span>
+          </li>
+          <li class="numbers-item">
+            <h4>Seguindo</h4>
+            <span id="following"></span>
+          </li>
+        </ul>
+        <a href="#" id="link" class="profile-link" target="_blank"
+          >Ver no Github</a
+        >
+      </div>
+    </header>
 
-<body>
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <h1 class="display-1">Cadastro:</h1>
-                <form>
-                    <div class="mb-3">
-
-                        <label class="form-label" for="name">Nome:</label>
-                        <input class="form-control" type="text" id="name">
-                    </div>
-                    <div class="mb-3">
-
-                        <label class="form-label" for="email">Email:</label>
-                        <input class="form-control" type="email" id="email">
-                    </div>
-                    <div class="mb-3">
-
-                        <label class="form-label" for="telefone">Telefone:</label>
-                        <input class="form-control" type="tel" id="telefone">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="terms">
-                        <label class="form-check-label" for="terms">Concordo com os <a href="#">termos e
-                                condições</a>.</label>
-                    </div>
-                    <div class="mb-3">
-                        <button class="btn btn-primary w-100" type="submit">Enviar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-
-</body>
-
+    <script>
+      document.addEventListener("DOMContentLoaded", async function () {
+        const nameElement = document.querySelector("#name");
+        const usernameElement = document.querySelector("#username");
+        const avatarElement = document.querySelector("#avatar");
+        const reposElement = document.querySelector("#repos");
+        const followersElement = document.querySelector("#followers");
+        const followingElement = document.querySelector("#following");
+        const linkElement = document.querySelector("#link");
+        try {
+          let response = await fetch(
+            "https://api.github.com/users/tjthiagocosta"
+          );
+          if (!response.ok) {
+            throw new Error("User not found");
+          }
+          let json = await response.json();
+          nameElement.innerText = json.name;
+          usernameElement.innerText = json.login;
+          avatarElement.src = json.avatar_url;
+          followingElement.innerText = json.following;
+          followersElement.innerText = json.followers;
+          repos.innerText = json.public_repos;
+          linkElement.href = json.html_url;
+        } catch (error) {
+          if (error.message === "User not found") {
+            document.getElementById("username").textContent =
+              "Usuário não encontrado";
+          } else {
+            console.error("An unexpected error occurred:", error);
+          }
+        }
+      });
+    </script>
+  </body>
 </html>
